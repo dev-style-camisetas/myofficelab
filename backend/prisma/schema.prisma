@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+
+
+model user {
+  id        Int      @id @default(autoincrement())
+  name      String?
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tokens   token[]
+  produtos produto[]
+  pedidos  pedido[]
+}
+
+model token {
+  id        Int      @id @default(autoincrement())
+  token     String
+  type      String
+  userId    Int
+  revoked   Boolean  @default(false)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user user @relation(fields: [userId], references: [id])
+}
+
+model produto {
+  id        Int      @id @default(autoincrement())
+  estampa   String
+  tamanho   String
+  cor       String
+  modelo    String
+  tecido    String
+  bloco     Json
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user              user                @relation(fields: [userId], references: [id])
+  produtosEmPedidos produtosEmPedidos[]
+}
+
+model pedido {
+  id        Int      @id @default(autoincrement())
+  status    String   @default("PEDIDO_RECEBIDO")
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user              user                @relation(fields: [userId], references: [id])
+  produtosEmPedidos produtosEmPedidos[]
+}
+
+model produtosEmPedidos {
+  id_pedido  Int
+  id_produto Int
+  quantidade Int @default(1)
+
+  pedido  pedido  @relation(fields: [id_pedido], references: [id])
+  produto produto @relation(fields: [id_produto], references: [id])
+
+  @@id([id_pedido, id_produto])
+}
