@@ -7,9 +7,9 @@ import PrintIcon from '@mui/icons-material/Print';
 
 const steps = [
   { key: 'PEDIDO_RECEBIDO', label: 'Recebido', icon: <HourglassTopIcon fontSize="small" /> },
-  { key: 'EM_IMPRESSAO', label: 'Impressão', icon: <PrintIcon fontSize="small" /> },
-  { key: 'EM_COSTURA', label: 'Costura', icon: <LocalLaundryServiceIcon fontSize="small" /> },
-  { key: 'FINALIZADO', label: 'Finalizado', icon: <CheckIcon fontSize="small" /> },
+  { key: 'PENDING', label: 'Impressão', icon: <PrintIcon fontSize="small" /> },
+  { key: 'PROCESSING', label: 'Costura', icon: <LocalLaundryServiceIcon fontSize="small" /> },
+  { key: 'COMPLETED', label: 'Finalizado', icon: <CheckIcon fontSize="small" /> },
 ];
 
 export default function StatusPedido({ status = 'PEDIDO_RECEBIDO', compact = false }) {
