@@ -13,15 +13,12 @@ export default function Acompanhar() {
   const { pedidos, fetchPedidos, updateStatus } = usePedidos();
 
   useEffect(() => {
-    // fetchPedidos é chamado automaticamente pelo context, mas garantir inicialização
-    fetchPedidos();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+     fetchPedidos();
+   }, []);
 
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  // no menu state — only view details allowed
-  const [search, setSearch] = useState('');
+   const [search, setSearch] = useState('');
 
 
   const handleRefresh = async () => {
@@ -51,8 +48,7 @@ export default function Acompanhar() {
       .replace(/\s+/g, '_')
       .replace(/[^a-z0-9_]/g, '');
 
-  // Light formatter matching ProductCard/CamisetaPreview conventions
-  const buildImagePath = (produto) => {
+   const buildImagePath = (produto) => {
     if (!produto) return '/basica_branca.png';
     const modeloMap = { 'Básico': 'basica', 'Polo': 'polo', 'Regata': 'regata' };
     const corMap = { 'Preto': 'Preta', 'Branco': 'Branca', 'Azul': 'Azul' };
@@ -158,8 +154,7 @@ export default function Acompanhar() {
                 </Grid>
               </CardContent>
               <Box sx={{ px: 2, pb: 2 }}>
-                {/* Status bar rendered full-width at the bottom, horizontal */}
-                <StatusPedido status={p.status} />
+                 <StatusPedido status={p.status} />
               </Box>
             </Card>
           </Grid>

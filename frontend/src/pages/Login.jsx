@@ -17,9 +17,8 @@ import {
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 export default function Login() {
-  const { login, register, isAuthenticated, loading } = useAuth();
+  const { login, register, isAuthenticated } = useAuth();
   const theme = useTheme();
-  // using inline errors/alerts; toast provider (MUI Snackbar) still available as useToast if needed
 
   const [isRegister, setIsRegister] = useState(false);
   const [name, setName] = useState('');
@@ -39,7 +38,7 @@ export default function Login() {
     e?.preventDefault();
     setError('');
     setSubmitting(true);
-    // client-side validation
+
     const validEmail = validateEmail(email);
     const validPassword = validatePassword(password);
     setEmailError(validEmail ? '' : 'Informe um email válido');
@@ -63,7 +62,7 @@ export default function Login() {
   const handleRegister = async (e) => {
     e?.preventDefault();
     setError('');
-    // client-side validation
+
     const validName = validateName(name);
     const validEmail = validateEmail(email);
     const validPassword = validatePassword(password);
@@ -74,9 +73,7 @@ export default function Login() {
     setPasswordError(validPassword ? '' : 'Senha deve ter ao menos 6 caracteres');
     setConfirmError(passwordsMatch ? '' : 'As senhas não coincidem');
 
-    if (!validName || !validEmail || !validPassword || !passwordsMatch) {
-      return;
-    }
+    if (!validName || !validEmail || !validPassword || !passwordsMatch) return;
 
     setSubmitting(true);
     try {
@@ -89,10 +86,10 @@ export default function Login() {
     }
   };
 
-  // Validation helpers
   function validateEmail(v) {
     if (!v) return false;
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(".+"))@(([^<>()[\]\\.,;:\s@\"]+\.)+[^<>()[\]\\.,;:\s@\"]{2,})$/i;
+    const re =
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(".+"))@(([^<>()[\]\\.,;:\s@\"]+\.)+[^<>()[\]\\.,;:\s@\"]{2,})$/i;
     return re.test(String(v).toLowerCase().trim());
   }
 
@@ -107,14 +104,25 @@ export default function Login() {
   }
 
   return (
-    <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', bgcolor: theme.palette.background.default, pt: { xs: 4, md: 6 }, pb: { xs: 4, md: 8 } }}>
-  <Container maxWidth="md">
+    <Box
+      sx={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        bgcolor: theme.palette.background.default,
+        pt: { xs: 4, md: 6 },
+        pb: { xs: 4, md: 8 },
+      }}
+    >
+      <Container maxWidth="lg">
         <Paper elevation={6} sx={{ borderRadius: 3, overflow: 'hidden' }}>
           <Grid container>
-            <Grid
+
+             <Grid
               item
               xs={12}
-              md={5}
+              md={6}
               sx={{
                 background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
                 color: '#fff',
@@ -128,15 +136,17 @@ export default function Login() {
               <Avatar sx={{ bgcolor: 'rgba(255,255,255,0.16)', mb: 2 }}>
                 <LockOutlinedIcon sx={{ color: '#fff' }} />
               </Avatar>
+
               <Typography variant="h5" sx={{ fontWeight: 700, mb: 1 }}>
-                Bem-vindo à Loja
+                Bem-vindo ao myoffice lab
               </Typography>
-              <Typography sx={{ opacity: 0.92, textAlign: 'center' }}>
-                Crie camisetas personalizadas e acompanhe seus pedidos com facilidade.
+
+              <Typography sx={{ opacity: 0.92, textAlign: 'center', maxWidth: 320 }}>
+                Personalize camisetas do seu time e dê upgrade no visual da sua squad.
               </Typography>
             </Grid>
 
-            <Grid item xs={12} md={7} sx={{ p: { xs: 4, md: 6 } }}>
+             <Grid item xs={12} md={6} sx={{ p: { xs: 4, md: 6 } }}>
               <Typography variant="h6" sx={{ mb: 2, fontWeight: 700 }}>
                 {isRegister ? 'Crie sua conta' : 'Entre na sua conta'}
               </Typography>
@@ -147,12 +157,19 @@ export default function Login() {
                 </Alert>
               )}
 
-              <Box component="form" onSubmit={isRegister ? handleRegister : handleLogin} noValidate>
+              <Box
+                component="form"
+                onSubmit={isRegister ? handleRegister : handleLogin}
+                noValidate
+              >
                 {isRegister && (
                   <TextField
                     label="Nome"
                     value={name}
-                    onChange={(e) => { setName(e.target.value); if (nameError) setNameError(''); }}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                      if (nameError) setNameError('');
+                    }}
                     fullWidth
                     margin="dense"
                     required
@@ -165,7 +182,10 @@ export default function Login() {
                   label="Email"
                   type="email"
                   value={email}
-                  onChange={(e) => { setEmail(e.target.value); if (emailError) setEmailError(''); }}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (emailError) setEmailError('');
+                  }}
                   fullWidth
                   margin="dense"
                   required
@@ -177,7 +197,10 @@ export default function Login() {
                   label="Senha"
                   type="password"
                   value={password}
-                  onChange={(e) => { setPassword(e.target.value); if (passwordError) setPasswordError(''); }}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    if (passwordError) setPasswordError('');
+                  }}
                   fullWidth
                   margin="dense"
                   required
@@ -190,7 +213,10 @@ export default function Login() {
                     label="Confirmar senha"
                     type="password"
                     value={confirmPassword}
-                    onChange={(e) => { setConfirmPassword(e.target.value); if (confirmError) setConfirmError(''); }}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                      if (confirmError) setConfirmError('');
+                    }}
                     fullWidth
                     margin="dense"
                     required
@@ -207,21 +233,47 @@ export default function Login() {
                   sx={{ mt: 3, py: 1.25, fontWeight: 700 }}
                   disabled={submitting}
                 >
-                  {submitting ? (isRegister ? 'Cadastrando...' : 'Entrando...') : isRegister ? 'Cadastrar' : 'Entrar'}
+                  {submitting
+                    ? isRegister
+                      ? 'Cadastrando...'
+                      : 'Entrando...'
+                    : isRegister
+                    ? 'Cadastrar'
+                    : 'Entrar'}
                 </Button>
 
                 <Box sx={{ mt: 2, textAlign: 'center' }}>
                   {isRegister ? (
                     <Typography variant="body2">
                       Já tem conta?{' '}
-                      <MuiLink component="button" onClick={() => { setIsRegister(false); setError(''); setNameError(''); setEmailError(''); setPasswordError(''); setConfirmError(''); }}>
+                      <MuiLink
+                        component="button"
+                        onClick={() => {
+                          setIsRegister(false);
+                          setError('');
+                          setNameError('');
+                          setEmailError('');
+                          setPasswordError('');
+                          setConfirmError('');
+                        }}
+                      >
                         Entrar
                       </MuiLink>
                     </Typography>
                   ) : (
                     <Typography variant="body2">
                       Não tem conta?{' '}
-                      <MuiLink component="button" onClick={() => { setIsRegister(true); setError(''); setNameError(''); setEmailError(''); setPasswordError(''); setConfirmError(''); }}>
+                      <MuiLink
+                        component="button"
+                        onClick={() => {
+                          setIsRegister(true);
+                          setError('');
+                          setNameError('');
+                          setEmailError('');
+                          setPasswordError('');
+                          setConfirmError('');
+                        }}
+                      >
                         Cadastre-se
                       </MuiLink>
                     </Typography>
@@ -229,6 +281,7 @@ export default function Login() {
                 </Box>
               </Box>
             </Grid>
+
           </Grid>
         </Paper>
       </Container>

@@ -11,8 +11,8 @@ export default function Footer() {
       <Container maxWidth="lg">
         <Grid container spacing={4} alignItems="flex-start">
           <Grid item xs={12} md={4}>
-            <Typography variant="h6" sx={{ fontWeight: 900, mb: 1 }}>Loja de Camisetas</Typography>
-            <Typography color="text.secondary" sx={{ mb: 2 }}>Camisetas personalizadas com acabamento profissional. Design próprio, impressão de qualidade e entrega confiável.</Typography>
+            <Typography variant="h6" sx={{ fontWeight: 900, mb: 1 }}>myoffice lab</Typography>
+            <Typography color="text.secondary" sx={{ mb: 2 }}>Onde equipes tech transformam identidade em design e design em camisetas.</Typography>
 
             <Stack direction="row" spacing={1} alignItems="center">
               <IconButton aria-label="facebook" href="#" size="small"><FacebookIcon fontSize="small" /></IconButton>
@@ -21,7 +21,7 @@ export default function Footer() {
               <IconButton aria-label="linkedin" href="#" size="small"><LinkedInIcon fontSize="small" /></IconButton>
             </Stack>
 
-            <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mt: 3 }}>© {new Date().getFullYear()} Loja de Camisetas. Todos os direitos reservados.</Typography>
+            <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mt: 3 }}>© {new Date().getFullYear()} myoffice lab. Todos os direitos reservados.</Typography>
           </Grid>
 
           <Grid item xs={6} md={2}>

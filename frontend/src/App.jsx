@@ -12,6 +12,7 @@ import Home from './pages/Home';
 import Personalizar from './pages/Personalizar';
 import Acompanhar from './pages/Acompanhar';
 import Templates from './pages/Templates';
+import ProdutosMaisPedidos from './pages/ProdutosMaisPedidos';
 import ProductDetails from './pages/ProductDetails';
 import Profile from './pages/Profile';
 import { PedidoProvider } from './contexts/PedidoContext';
@@ -47,12 +48,23 @@ export default function App() {
     return (
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 700 }}>
-            Loja de Camisetas Personalizadas
-          </Typography>
+          <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
+            <Box component={Link} to="/" sx={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }}>
+              <Box
+                component="img"
+                src="/logo1.png"
+                alt="myoffice lab"
+                sx={{ height: 40, width: 'auto', display: { xs: 'none', sm: 'inline-block' }, mr: 1 }}
+              />
+              <Typography variant="h6" sx={{ fontWeight: 700, display: { xs: 'inline-block', sm: 'none' } }}>
+                Loja
+              </Typography>
+            </Box>
+          </Box>
           <Button color="inherit" component={Link} to="/">Início</Button>
           <Button color="inherit" component={Link} to="/personalizar">Personalizar</Button>
           <Button color="inherit" component={Link} to="/templates">Templates</Button>
+          <Button color="inherit" component={Link} to="/mais-pedidos">Mais pedidos</Button>
           <Button color="inherit" component={Link} to="/acompanhar">Pedidos</Button>
           {isAuthenticated && (
             <>
@@ -161,6 +173,7 @@ export default function App() {
               <Route path="/" element={<Home />} />
               <Route path="/personalizar" element={<Personalizar />} />
               <Route path="/templates" element={<Templates />} />
+              <Route path="/mais-pedidos" element={<ProdutosMaisPedidos />} />
               <Route path="/produtos/:id" element={<ProductDetails />} />
               <Route path="/acompanhar" element={<Acompanhar />} />
               <Route path="/profile" element={<Profile />} />

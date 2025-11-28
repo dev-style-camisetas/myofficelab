@@ -7,15 +7,14 @@ import { Link as RouterLink } from 'react-router-dom';
 export default function Home() {
   return (
     <Container maxWidth="lg">
-      {/* Hero */}
-      <Box sx={{ mt: 6, mb: 6 }}>
+       <Box sx={{ mt: 6, mb: 6 }}>
         <Grid container spacing={4} alignItems="center">
           <Grid item xs={12} md={7}>
             <Typography variant="h3" component="h1" fontWeight={800} gutterBottom>
-              Crie camisetas únicas, rápidas e com qualidade profissional
+              Camisetas feitas para devs, por devs.
             </Typography>
             <Typography variant="h6" color="text.secondary" sx={{ mb: 3 }}>
-              Escolha modelo, tecido, cor e estampa. Processamento rápido e acompanhamento do pedido em tempo real.
+              Customize, salve o template e atualize o estilo da sua equipe. Processamento rápido e acompanhamento do pedido em tempo real.
             </Typography>
             <Stack direction="row" spacing={2}>
               <Button variant="contained" size="large" component={RouterLink} to="/personalizar">
@@ -29,39 +28,36 @@ export default function Home() {
           <Grid item xs={12} md={5}>
             <Paper elevation={3} sx={{ borderRadius: 2, overflow: 'hidden' }}>
               <Box sx={{ height: 220, display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: 'background.default', position: 'relative' }}>
-                {/* Carousel that automatically alternates colors */}
-                {/** Using same filename conventions as other components: /basica_branca.png, /basica_preta.png, /basica_azul.png **/}
-                <CarouselPreview />
+                 <CarouselPreview />
               </Box>
             </Paper>
           </Grid>
         </Grid>
       </Box>
 
-      {/* Features */}
-      <Box sx={{ mb: 6 }}>
+       <Box sx={{ mb: 6 }}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={4}>
             <Card variant="outlined">
               <CardContent>
-                <Typography variant="h6" fontWeight={700} gutterBottom>Design fácil</Typography>
-                <Typography color="text.secondary">Editor simples e intuitivo para montar sua arte em minutos.</Typography>
+                <Typography variant="h6" fontWeight={700} gutterBottom>Editor Rápido</Typography>
+                <Typography color="text.secondary">Monte sua camiseta como quem faz um pull request: simples, direto e sem bug.</Typography>
               </CardContent>
             </Card>
           </Grid>
           <Grid item xs={12} md={4}>
             <Card variant="outlined">
               <CardContent>
-                <Typography variant="h6" fontWeight={700} gutterBottom>Produção confiável</Typography>
-                <Typography color="text.secondary">Materiais de qualidade e controle rigoroso em todas as etapas.</Typography>
+                <Typography variant="h6" fontWeight={700} gutterBottom>Qualidade garantida</Typography>
+                <Typography color="text.secondary">Estampa nítida, tecido top e um acabamento digno de sprint final.</Typography>
               </CardContent>
             </Card>
           </Grid>
           <Grid item xs={12} md={4}>
             <Card variant="outlined">
               <CardContent>
-                <Typography variant="h6" fontWeight={700} gutterBottom>Acompanhamento</Typography>
-                <Typography color="text.secondary">Acompanhe cada pedido com status e notificações em tempo real.</Typography>
+                <Typography variant="h6" fontWeight={700} gutterBottom>Status em tempo real </Typography>
+                <Typography color="text.secondary">Acompanhe o “deploy” da sua camiseta do início ao fim.</Typography>
               </CardContent>
             </Card>
           </Grid>
@@ -98,8 +94,7 @@ function CarouselPreview() {
   const [focus, setFocus] = React.useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
 
-  // autoplay with pause on hover or focus
-  React.useEffect(() => {
+   React.useEffect(() => {
     const mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
     const set = () => setPrefersReducedMotion(!!(mq && mq.matches));
     set();
@@ -116,19 +111,16 @@ function CarouselPreview() {
   const prev = () => setIndex(i => (i - 1 + imgs.length) % imgs.length);
   const next = () => setIndex(i => (i + 1) % imgs.length);
 
-  // keyboard navigation
-  React.useEffect(() => {
+   React.useEffect(() => {
     const onKey = (e) => {
       if (e.key === 'ArrowLeft') prev();
       if (e.key === 'ArrowRight') next();
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [imgs.length]);
+   }, [imgs.length]);
 
-  // simple touch/swipe support
-  const touchRef = React.useRef({ x: 0 });
+   const touchRef = React.useRef({ x: 0 });
   const handleTouchStart = (e) => { touchRef.current.x = e.touches?.[0]?.clientX || 0; };
   const handleTouchEnd = (e) => {
     const endX = e.changedTouches?.[0]?.clientX || 0;
@@ -146,10 +138,8 @@ function CarouselPreview() {
       onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}
       onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}
     >
-      {/* animated gradient halo */}
-      <Box sx={{ position: 'absolute', width: 360, height: 140, borderRadius: 4, filter: 'blur(28px)', zIndex: 0, pointerEvents: 'none', background: 'linear-gradient(90deg, rgba(108,92,231,0.18), rgba(106,170,255,0.12))', transition: 'opacity 400ms ease', opacity: hover ? 1 : 0.85, '@keyframes gradientShift': { '0%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' }, '100%': { backgroundPosition: '0% 50%' } }, backgroundSize: '200% 200%', animation: prefersReducedMotion ? 'none' : 'gradientShift 10s linear infinite' }} />
-      {/* arrows */}
-      <IconButton onClick={prev} size="small" sx={{ position: 'absolute', left: 10, zIndex: 10, bgcolor: 'rgba(255,255,255,0.9)', boxShadow: 2, '&:hover': { bgcolor: 'white', transform: 'translateX(-2px)' }, transition: 'all 220ms ease' }} aria-label="anterior">
+       <Box sx={{ position: 'absolute', width: 360, height: 140, borderRadius: 4, filter: 'blur(28px)', zIndex: 0, pointerEvents: 'none', background: 'linear-gradient(90deg, rgba(108,92,231,0.18), rgba(106,170,255,0.12))', transition: 'opacity 400ms ease', opacity: hover ? 1 : 0.85, '@keyframes gradientShift': { '0%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' }, '100%': { backgroundPosition: '0% 50%' } }, backgroundSize: '200% 200%', animation: prefersReducedMotion ? 'none' : 'gradientShift 10s linear infinite' }} />
+       <IconButton onClick={prev} size="small" sx={{ position: 'absolute', left: 10, zIndex: 10, bgcolor: 'rgba(255,255,255,0.9)', boxShadow: 2, '&:hover': { bgcolor: 'white', transform: 'translateX(-2px)' }, transition: 'all 220ms ease' }} aria-label="anterior">
         <ArrowBackIosIcon fontSize="small" />
       </IconButton>
 
@@ -180,13 +170,11 @@ function CarouselPreview() {
         <ArrowForwardIosIcon fontSize="small" />
       </IconButton>
 
-      {/* name of current color on the lateral (left) */}
-      <Box sx={{ position: 'absolute', left: 12, bottom: 22, zIndex: 3 }}>
+       <Box sx={{ position: 'absolute', left: 12, bottom: 22, zIndex: 3 }}>
         <Typography variant="subtitle1" sx={{ fontWeight: 800, letterSpacing: 0.2 }}>{cores[index]}</Typography>
       </Box>
 
-      {/* indicators */}
-      <Box sx={{ position: 'absolute', bottom: 8, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 0.5, zIndex: 3 }}>
+       <Box sx={{ position: 'absolute', bottom: 8, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 0.5, zIndex: 3 }}>
         {imgs.map((_, i) => (
           <Box key={i}
             component="button"

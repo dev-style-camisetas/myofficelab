@@ -8,22 +8,19 @@ import CamisetaPreview from '../components/CamisetaPreview';
 import { usePedidos } from '../contexts/PedidoContext';
 import api from '../config/axios';
 
-// Opções das características
-const modelos = ['Básico', 'Polo', 'Regata'];
+ const modelos = ['Básico', 'Polo', 'Regata'];
 const tecidos = ['Algodão', 'Dry Fit', 'Poliéster'];
 const cores = ['Branco', 'Preto', 'Azul'];
 const estampas = ['Logo minimalista', 'Frase personalizada', 'Desenho artístico'];
 const tamanhos = ['P', 'M', 'G'];
 
-// Mapas para números (0-2)
-const modeloMap = { 'Básico': 0, 'Polo': 1, 'Regata': 2 };
+ const modeloMap = { 'Básico': 0, 'Polo': 1, 'Regata': 2 };
 const tecidoMap = { 'Algodão': 0, 'Dry Fit': 1, 'Poliéster': 2 };
 const corMap = { 'Branco': 0, 'Preto': 1, 'Azul': 2 };
 const estampaMap = { 'Logo minimalista': "0", 'Frase personalizada': "1", 'Desenho artístico': "2" };
 const tamanhoMap = { 'P': 0, 'M': 1, 'G': 2 };
 
-// Função para gerar bloco no novo padrão
-const gerarBloco = (form) => ({
+ const gerarBloco = (form) => ({
   cor: corMap[form.cor],
   lamina1: tecidoMap[form.tecido],
   lamina2: modeloMap[form.modelo],
@@ -62,12 +59,10 @@ export default function Personalizar() {
       const payload = { ...form, bloco };
 
       if (editingId) {
-        // atualizar produto existente — enviar apenas campos permitidos (sem bloco)
-        const updatePayload = { ...form };
+         const updatePayload = { ...form };
         const { data } = await api.put(`/produtos/${editingId}`, updatePayload);
         setSnack({ open: true, message: `Template atualizado!`, severity: 'success' });
-        // depois de editar, voltar para templates
-        navigate('/templates');
+         navigate('/templates');
       } else {
         const { data } = await api.post('/produtos', payload);
 
@@ -94,8 +89,7 @@ export default function Personalizar() {
 
   const disabled = !(form.modelo && form.tecido && form.cor && form.estampa && form.tamanho) || loading;
 
-  // Pre-fill form when navigated with produto state (for editing)
-  React.useEffect(() => {
+   React.useEffect(() => {
     if (location?.state?.produto) {
       const p = location.state.produto;
       setForm({ modelo: p.modelo || '', tecido: p.tecido || '', cor: p.cor || '', estampa: p.estampa || '', tamanho: p.tamanho || '' });
@@ -105,8 +99,7 @@ export default function Personalizar() {
 
   return (
     <Grid container spacing={3}>
-      {/* Formulário */}
-      <Grid item xs={12} md={6}>
+       <Grid item xs={12} md={6}>
         <Card>
           <CardContent>
             <Typography variant="h6" fontWeight={700} gutterBottom>
@@ -155,8 +148,7 @@ export default function Personalizar() {
         </Card>
       </Grid>
 
-      {/* Preview */}
-      <Grid item xs={12} md={6}>
+       <Grid item xs={12} md={6}>
         <CamisetaPreview
           cor={form.cor || 'Branco'}
           modelo={form.modelo || 'Básico'}
@@ -164,8 +156,7 @@ export default function Personalizar() {
         />
       </Grid>
 
-      {/* Snackbar */}
-      <Snackbar
+       <Snackbar
         open={snack.open}
         autoHideDuration={3500}
         onClose={() => setSnack(s => ({ ...s, open: false }))}

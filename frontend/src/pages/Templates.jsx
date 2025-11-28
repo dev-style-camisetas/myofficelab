@@ -21,8 +21,7 @@ export default function Templates() {
 
   const { isAuthenticated, loading: authLoading, user } = useAuth();
 
-  // image path helper copied from ProductCard to ensure same naming/mapping logic
-  const formatarNome = (texto) =>
+   const formatarNome = (texto) =>
     String(texto || '')
       .toLowerCase()
       .normalize('NFD')
@@ -69,8 +68,7 @@ export default function Templates() {
       setLoading(true);
       try {
         const { data } = await api.get('/produtos');
-        // Mostrar apenas os templates pertencentes ao usuário autenticado
-        const filtered = Array.isArray(data) && user ? data.filter(p => Number(p.userId) === Number(user.id)) : [];
+         const filtered = Array.isArray(data) && user ? data.filter(p => Number(p.userId) === Number(user.id)) : [];
         setProdutos(filtered);
       } catch (e) {
         setError('Falha ao carregar templates');
@@ -109,8 +107,7 @@ export default function Templates() {
           variant="contained"
           disabled={Object.keys(selected).length === 0}
           onClick={async () => {
-            // shortcut: enviar pedido diretamente
-            try {
+             try {
               const produtosPayload = Object.entries(selected).map(([id, qty]) => ({ id: Number(id), quantidade: Number(qty) }));
               await api.post('/pedidos', { produtos: produtosPayload, status: 'PEDIDO_RECEBIDO' });
               setSelected({});
@@ -129,8 +126,7 @@ export default function Templates() {
         </Button>
       </Box>
 
-      {/* Cart drawer */}
-      <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
+       <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
         <Box sx={{ width: 360, p: 2 }} role="presentation">
           <Typography variant="h6" sx={{ mb: 1, fontWeight: 700 }}>Carrinho</Typography>
           <Divider sx={{ mb: 1 }} />
